@@ -1,0 +1,859 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Real Estate API Documentation",
+    "description": "This is an API for Real Estate companies",
+    "contact": {
+      "name": "Murillo Lamego",
+      "url": "https://www.linkedin.com/in/murillolamego/",
+      "email": "murillolamegolopes@live.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "property",
+      "description": "Real estate properties"
+    },
+    {
+      "name": "category",
+      "description": "Type of property"
+    },
+    {
+      "name": "feature",
+      "description": "Characteristics of a property"
+    },
+    {
+      "name": "user",
+      "description": "Operations about user"
+    },
+    {
+      "name": "realtors",
+      "description": "Operations about realtors"
+    }
+  ],
+  "paths": {
+    "/properties": {
+      "get": {
+        "tags": [
+          "property"
+        ],
+        "summary": "List properties",
+        "description": "Get an list of all available properties with optional filters",
+        "operationId": "listProperties",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/property"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "property"
+        ],
+        "summary": "Add a new property",
+        "description": "Enlist a new available property",
+        "operationId": "createProperty",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "description": "Register a new property",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/property"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Property already exists"
+          }
+        }
+      }
+    },
+    "/properties/{propertyId}": {
+      "patch": {
+        "tags": [
+          "property"
+        ],
+        "summary": "Update a property",
+        "description": "Partially update a property",
+        "operationId": "updateProperty",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "description": "Update information of a property",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "rent": {
+                    "type": "number"
+                  },
+                  "sale": {
+                    "type": "number"
+                  },
+                  "categories": {
+                    "type": "array"
+                  },
+                  "features": {
+                    "type": "array"
+                  }
+                },
+                "example": {
+                  "name": "Property NAME UPDATED sample",
+                  "description": "Property DESCRIPTION UPDATED sample",
+                  "rent": 333,
+                  "sale": 444,
+                  "categories": [],
+                  "features": [1]
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "description": "Property ID to update",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "property"
+        ],
+        "summary": "Delete a property",
+        "description": "Delete a property by it's ID",
+        "operationId": "deleteProperty",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "description": "Property ID to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/properties/images/{propertyId}": {
+      "post": {
+        "tags": [
+          "property"
+        ],
+        "summary": "Upload property images",
+        "description": "Add images to property",
+        "operationId": "updatePropertyImages",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "images": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "propertyId",
+            "in": "path",
+            "description": "Property ID to add images",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or password incorrect"
+          }
+        }
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "category"
+        ],
+        "summary": "List categories",
+        "description": "Get an list of all existing categories",
+        "operationId": "listCategories",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/category"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "category"
+        ],
+        "summary": "Add a new category",
+        "description": "Create a new category of property",
+        "operationId": "createCategory",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "description": "Register a new type of property",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/category"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Category already exists"
+          }
+        }
+      }
+    },
+    "/categories/import": {
+      "post": {
+        "tags": [
+          "category"
+        ],
+        "summary": "Import categories from file",
+        "description": "Import categories from CSV file",
+        "operationId": "importCategory",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "description": "Import single or multiple categories from CSV file",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/categories/{categoryId}": {
+      "delete": {
+        "tags": [
+          "category"
+        ],
+        "summary": "Delete a category",
+        "description": "Delete a category by it's ID",
+        "operationId": "deleteCategory",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "Category ID to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/features": {
+      "get": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "List features",
+        "description": "Get an list of all existing features",
+        "operationId": "listFeatures",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/features"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "Add a new feature",
+        "description": "Create a new feature of property",
+        "operationId": "createFeature",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "description": "Register a new characteristic of a property",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/feature"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "feature already exists"
+          }
+        }
+      }
+    },
+    "/features/{featureId}": {
+      "delete": {
+        "tags": [
+          "feature"
+        ],
+        "summary": "Delete a feature",
+        "description": "Delete a feature by it's ID",
+        "operationId": "deleteFeature",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "featureId",
+            "in": "path",
+            "description": "Feature ID to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create a new user",
+        "description": "Register a new user",
+        "operationId": "createUser",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "description": "Register a new user with email and password",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "notadmin2@test.com",
+                  "password": "notadmin",
+                  "name": "notadmin"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/users/auth": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs user into the system",
+        "description": "Authenticate user into the system",
+        "operationId": "authUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "admin@test.com",
+                  "password": "123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or password incorrect"
+          }
+        }
+      }
+    },
+    "/users/reauth": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Relogs user into the system",
+        "description": "ReAuthenticate user into the system",
+        "operationId": "reAuthUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "token": "Refresh token provided in auth route"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid refresh token provided"
+          }
+        }
+      }
+    },
+    "/users/password/recover": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Request email for password recovery",
+        "description": "Request a link to reset user password",
+        "operationId": "recoverPassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "notadmin@test.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email not sent"
+          }
+        }
+      }
+    },
+    "/users/password/reset": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Reset user password",
+        "description": "Reset password using token from recovery email",
+        "operationId": "resetPassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "password": "Password recovery token"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "description": "Password recovery token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid token provided"
+          }
+        }
+      }
+    },
+    "/users/avatar": {
+      "patch": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Set user avatar",
+        "description": "Add or update user's avatar",
+        "operationId": "updateUserAvatar",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "avatar": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or password incorrect"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "patch": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update a user",
+        "description": "Update part of user's information",
+        "operationId": "updateUser",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User ID to update",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete a user",
+        "description": "Delete user based on it's ID",
+        "operationId": "deleteUser",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "User ID to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "property": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "rent": {
+          "type": "number"
+        },
+        "sale": {
+          "type": "number"
+        },
+        "categories": {
+          "type": "array"
+        },
+        "features": {
+          "type": "array"
+        }
+      },
+      "example": {
+        "name": "Property NAME sample",
+        "description": "Property DESCRIPTION sample",
+        "rent": 111,
+        "sale": 222,
+        "categories": [1],
+        "features": [1]
+      }
+    },
+    "category": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "Category NAME sample",
+        "description": "Category DESCRIPTION sample"
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "feature NAME sample",
+        "description": "feature DESCRIPTION sample"
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

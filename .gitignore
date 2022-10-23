@@ -1,0 +1,13 @@
+node_modules
+coverage
+.env
+.env.development
+.env.test
+tmp/avatar/*
+!tmp/avatar/.gitkeep
+tmp/properties/*
+!tmp/properties/.gitkeep
+yarn-error.log
+.vscode
+dist
+src/shared/infra/prisma/seed.ts

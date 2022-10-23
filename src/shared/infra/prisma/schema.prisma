@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          Int                      @id @default(autoincrement())
+  name        String                   @unique
+  description String
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
+  properties  CategoriesOnProperties[]
+}
+
+model CategoriesOnProperties {
+  property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId Int
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  assignedAt DateTime  @default(now())
+
+  @@id([propertyId, categoryId])
+}
+
+model Feature {
+  id          Int                    @id @default(autoincrement())
+  name        String                 @unique
+  description String
+  createdAt   DateTime               @default(now())
+  updatedAt   DateTime               @updatedAt
+  properties  FeaturesOnProperties[]
+}
+
+model FeaturesOnProperties {
+  property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId Int
+  feature    Feature?  @relation(fields: [featureId], references: [id])
+  featureId  Int
+  assignedAt DateTime  @default(now())
+
+  @@id([propertyId, featureId])
+}
+
+model Property {
+  id             Int                      @id @default(autoincrement())
+  name           String
+  description    String
+  rent           Int?                     @default(0)
+  sale           Int?                     @default(0)
+  available      Boolean?                 @default(true)
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+  categories     CategoriesOnProperties[]
+  features       FeaturesOnProperties[]
+  PropertyImages PropertyImage[]
+}
+
+model PropertyImage {
+  id         String   @id @default(uuid())
+  name       String
+  createdAt  DateTime @default(now())
+  property   Property @relation(fields: [propertyId], references: [id])
+  propertyId Int
+}
+
+model User {
+  id        String      @id @default(uuid())
+  email     String      @unique
+  password  String
+  name      String
+  avatar    String?
+  admin     Boolean     @default(false)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  Tokens    UserToken[]
+}
+
+model UserToken {
+  id           String   @id @default(uuid())
+  refreshToken String   @unique
+  createdAt    DateTime @default(now())
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+}
