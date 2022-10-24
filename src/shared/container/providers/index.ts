@@ -19,18 +19,13 @@ container.registerInstance<IMailProvider>(
   new EtherealMailProvider()
 );
 
-// const storageMode = {
-//   local: LocalStorageProvider,
-//   s3: S3StorageProvider,
-//   cloudinary: CloudinaryStorageProvider,
-// };
-
-// container.registerSingleton<IStorageProvider>(
-//   "StorageProvider",
-//   storageMode[process.env.STORAGE_MODE]
-// );
+const storageMode = {
+  local: LocalStorageProvider,
+  s3: S3StorageProvider,
+  cloudinary: CloudinaryStorageProvider,
+};
 
 container.registerSingleton<IStorageProvider>(
   "StorageProvider",
-  CloudinaryStorageProvider
+  storageMode[process.env.STORAGE_MODE]
 );
