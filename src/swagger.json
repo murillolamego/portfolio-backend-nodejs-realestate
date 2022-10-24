@@ -45,6 +45,9 @@
         "summary": "List properties",
         "description": "Get an list of all available properties with optional filters",
         "operationId": "listProperties",
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -245,6 +248,9 @@
         "summary": "List categories",
         "description": "Get an list of all existing categories",
         "operationId": "listCategories",
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -363,6 +369,9 @@
         "summary": "List features",
         "description": "Get an list of all existing features",
         "operationId": "listFeatures",
+        "security": [
+          { "bearerAuth": [] }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
