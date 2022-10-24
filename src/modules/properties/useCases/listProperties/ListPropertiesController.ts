@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { IListPropertiesDTO } from "modules/properties/dtos/IListPropertiesDTO";
+import { IListPropertiesDTO } from "@modules/properties/dtos/IListPropertiesDTO";
 
 import { ListPropertiesUseCase } from "./ListPropertiesUseCase";
 

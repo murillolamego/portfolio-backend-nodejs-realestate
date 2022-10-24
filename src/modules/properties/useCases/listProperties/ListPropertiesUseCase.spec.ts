@@ -1,5 +1,5 @@
-import { Property } from "modules/properties/entities/Property";
-import { PropertiesRepositoryInMemory } from "modules/properties/repositories/in-memory/PropertiesRepositoryInMemory";
+import { Property } from "@modules/properties/entities/Property";
+import { PropertiesRepositoryInMemory } from "@modules/properties/repositories/in-memory/PropertiesRepositoryInMemory";
 
 import { ListPropertiesUseCase } from "./ListPropertiesUseCase";
 

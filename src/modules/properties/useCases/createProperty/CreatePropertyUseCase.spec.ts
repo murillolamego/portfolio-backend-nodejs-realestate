@@ -1,6 +1,6 @@
-import { ICreatePropertyDTO } from "modules/properties/dtos/ICreatePropertyDTO";
-import { Property } from "modules/properties/entities/Property";
-import { PropertiesRepositoryInMemory } from "modules/properties/repositories/in-memory/PropertiesRepositoryInMemory";
+import { ICreatePropertyDTO } from "@modules/properties/dtos/ICreatePropertyDTO";
+import { Property } from "@modules/properties/entities/Property";
+import { PropertiesRepositoryInMemory } from "@modules/properties/repositories/in-memory/PropertiesRepositoryInMemory";
 
 import { CreatePropertyUseCase } from "./CreatePropertyUseCase";
 

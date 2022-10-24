@@ -1,5 +1,5 @@
-import { ICreateCategoryDTO } from "modules/properties/dtos/ICreateCategoryDTO";
-import { Category } from "modules/properties/entities/Category";
+import { ICreateCategoryDTO } from "@modules/properties/dtos/ICreateCategoryDTO";
+import { Category } from "@modules/properties/entities/Category";
 
 import { ICategoriesRepository } from "../ICategoriesRepository";
 

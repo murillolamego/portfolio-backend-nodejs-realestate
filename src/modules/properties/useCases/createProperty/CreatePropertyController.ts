@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { ICreatePropertyDTO } from "modules/properties/dtos/ICreatePropertyDTO";
+import { ICreatePropertyDTO } from "@modules/properties/dtos/ICreatePropertyDTO";
 
 import { CreatePropertyUseCase } from "./CreatePropertyUseCase";
 

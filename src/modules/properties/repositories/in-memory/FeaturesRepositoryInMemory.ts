@@ -1,5 +1,5 @@
-import { ICreateFeatureDTO } from "modules/properties/dtos/ICreateFeatureDTO";
-import { Feature } from "modules/properties/entities/Feature";
+import { ICreateFeatureDTO } from "@modules/properties/dtos/ICreateFeatureDTO";
+import { Feature } from "@modules/properties/entities/Feature";
 
 import { IFeaturesRepository } from "../IFeaturesRepository";
 

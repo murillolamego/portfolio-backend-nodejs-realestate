@@ -1,6 +1,6 @@
-import { ICreateUserTokenDTO } from "modules/accounts/dtos/ICreateUserTokenDTO";
-import { UserToken } from "modules/accounts/entities/UserToken";
-import { IUserTokensRepository } from "modules/accounts/repositories/IUserTokensRepository";
+import { ICreateUserTokenDTO } from "@modules/accounts/dtos/ICreateUserTokenDTO";
+import { UserToken } from "@modules/accounts/entities/UserToken";
+import { IUserTokensRepository } from "@modules/accounts/repositories/IUserTokensRepository";
 
 const userTokens: UserToken[] = [];
 

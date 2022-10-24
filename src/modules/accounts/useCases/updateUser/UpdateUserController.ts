@@ -2,7 +2,7 @@ import { hash } from "bcrypt";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { ICreateUserDTO } from "modules/accounts/dtos/ICreateUserDTO";
+import { ICreateUserDTO } from "@modules/accounts/dtos/ICreateUserDTO";
 
 import { UpdateUserUseCase } from "./UpdateUserUseCase";
 

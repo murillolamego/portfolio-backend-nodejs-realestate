@@ -1,6 +1,6 @@
-import { ICreatePropertyDTO } from "modules/properties/dtos/ICreatePropertyDTO";
-import { IListPropertiesDTO } from "modules/properties/dtos/IListPropertiesDTO";
-import { Property } from "modules/properties/entities/Property";
+import { ICreatePropertyDTO } from "@modules/properties/dtos/ICreatePropertyDTO";
+import { IListPropertiesDTO } from "@modules/properties/dtos/IListPropertiesDTO";
+import { Property } from "@modules/properties/entities/Property";
 
 import { IPropertiesRepository } from "../IPropertiesRepository";
 
