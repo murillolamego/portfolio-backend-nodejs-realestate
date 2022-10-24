@@ -10,4 +10,3 @@ tmp/properties/*
 yarn-error.log
 .vscode
 dist
-src/shared/infra/prisma/seed.ts
