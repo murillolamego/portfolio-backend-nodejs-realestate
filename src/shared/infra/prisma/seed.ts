@@ -1,8 +1,6 @@
-/* eslint-disable import/first */
 import { hash } from "bcrypt";
-import * as dotenv from "dotenv";
-dotenv.config();
 
+import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
