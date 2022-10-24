@@ -32,3 +32,16 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         source: "., !node_modules"
         target: "~/app/portfolio-backend-nodejs-realestate"
+        
+    - name: Update API
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        port: ${{ secrets.SSH_PORT }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd ~/app/portfolio-backend-nodejs-realestate
+          yarn
+          yarn prisma migrate deploy
+          pm2 restart realestate_api
