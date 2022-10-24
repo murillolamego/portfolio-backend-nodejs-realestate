@@ -1,15 +1,16 @@
+/* eslint-disable import/first */
 import "reflect-metadata";
 import * as dotenv from "dotenv";
+dotenv.config();
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import swaggerUI from "swagger-ui-express";
 
 import { AppError } from "@shared/errors/AppError";
-import "@shared/container/index";
 
 import swaggerFile from "../../../swagger.json";
 import { router } from "./routes";
-dotenv.config();
+import "@shared/container/index";
 
 const app = express();
 
