@@ -7,6 +7,7 @@
 <ul>
 	<li>Core: <strong>NodeJS</strong> with <strong>ExpressJS</strong> 
 	framework</li>
+  <li>Language: <strong>TypeScript</strong> with <strong>JavaScript</strong> when required</li>
 	<li>Database: <strong>PostgreSQL</strong> with <strong>PrismaORM</strong></li>
 	<li>Testing: <strong>Jest</strong> for unit testing <strong>Supertest</strong> for integration</li>
 	<li>Documentation: <strong>Swagger</strong> with <strong>Open API 3</strong></li>
