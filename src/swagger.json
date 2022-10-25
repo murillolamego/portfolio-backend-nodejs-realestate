@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Real Estate API Documentation",
-    "description": "This is an API for Real Estate companies",
+    "description": "This is a sample API for Real Estate Companies, capable of cataloging properties (for sale and rental), their categories and features, manage their users (customers and realtors), and much more.",
     "contact": {
       "name": "Murillo Lamego",
       "url": "https://www.linkedin.com/in/murillolamego/",
